@@ -1,20 +1,3 @@
-/*Schrift: 'Cormorant Garamond'
-Farben: rgb(233, 233, 224), #333
-  */
-
-@font-face {
-  font-family: "Cormorant Garamond Bold";
-  src: url("../fonts/Cormorant_Garamond/CormorantGaramond-Bold.ttf");
-}
-@font-face {
-  font-family: "Cormorant Garamond Regular";
-  src: url("../fonts/Cormorant_Garamond/CormorantGaramond-Regular.ttf");
-}
-@font-face {
-  font-family: "Cormorant Garamond Italic";
-  src: url("../fonts/Cormorant_Garamond/CormorantGaramond-LightItalic.ttf");
-}
-
 * {
   padding: 0;
   margin: 0;
@@ -24,28 +7,25 @@ Farben: rgb(233, 233, 224), #333
 
 .window {
   background-color: rgb(233, 233, 224);
-  width: 1440px;
   padding: 3vh 5vw;
   display: grid;
-  grid-template-columns: 6fr 1fr;
+  gap: 2.5vh;
   grid-template:
-    "title title title title title title title"
-    "header header header header header header header"
-    "main main main main main main aside";
+    "title title"
+    "header header"
+    "main aside" /4fr min-content;
 }
 
-/* Headline */
+/* HEADLINE */
 
 header {
   grid-area: title;
   text-align: center;
-  margin-bottom: 2vh;
 }
 
 h1 {
   font-size: 1.8rem;
   display: inline-block;
-  margin: auto;
 }
 
 h1::first-letter {
@@ -56,48 +36,46 @@ h1::first-letter {
   grid-area: header;
   display: flex;
   justify-content: space-around;
-  padding: 0.5vh 0;
-  border-top: 4px double #333;
-  border-bottom: 4px double #333;
+  padding: 0.4vh 0;
+  border-top: 6px double #333;
+  border-bottom: 6px double #333;
 }
 
+/* MAIN */
 p {
-  line-height: 1rem;
+  line-height: 1.1rem;
 }
 
 h3 {
   font-size: 1.5rem;
 }
 
-/* MAIN */
-
 main {
   grid-area: main;
   display: grid;
-  grid-template: 10vh 1fr / repeat(2, 1fr);
+  grid-template: 9vh 1fr / 1fr 1fr;
 }
 
-/* NEWSPAPER ARTICLES */
+/* SECTION - NEWSPAPER ARTICLES */
 
 main h2 {
+  grid-area: 1 / span 3;
   justify-self: center;
-  align-self: center;
   font-size: 2.2rem;
-  grid-area: 1/1/2/3;
 }
 
 main section {
   grid-area: 2/1/3/2;
   display: grid;
-  gap: 1vh;
+  gap: 5vh 1.5vw;
   grid-template: 1.5fr 3fr 4.5fr/ 1fr 1fr;
 }
 
 /* IMAGE */
 
 main figure {
-  padding: 0 2vh;
   grid-area: 2/2/3/3;
+  padding-left: 1vw;
 }
 
 main figure img {
@@ -105,22 +83,20 @@ main figure img {
 }
 
 main figure figcaption {
-  font-family: "Cormorant Garamond Italic";
-  font-size: 0.8rem;
+  font-style: italic;
 }
 
-/* ADVERTISEMENTS */
+/* SIDEBAR - ADVERTISEMENTS */
 aside {
   grid-area: aside;
   display: grid;
-  gap: 2vh;
-  grid-template: 5vh repeat(3, 1fr) / 100%;
+  gap: 2.5vh;
+  grid-template: 3vh auto / auto;
 }
 
 aside h4 {
   text-align: center;
   font-size: 1.2rem;
-  margin-top: 2vh;
 }
 
 aside > *:not(h4) {
@@ -128,11 +104,9 @@ aside > *:not(h4) {
   text-align: center;
 }
 
-/* Your add here */
 aside .add-ad h5 {
-  margin: 3vh;
+  margin-top: 2vh;
   font-size: 3rem;
-  word-break: break-word;
 }
 
 aside .knife-ad {
@@ -140,17 +114,52 @@ aside .knife-ad {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0.8vh 1.5vw;
 }
 
-aside .knife-ad span {
+aside .knife-ad p {
+  width: 13vw;
+}
+
+aside .knife-ad a {
   font-size: 1.2rem;
   color: #737b80;
-  text-decoration: underline;
   text-underline-offset: 4px;
 }
 
 aside img {
   width: 100%;
-  padding: 2vh;
+  padding: 2.5vh;
   filter: grayscale(100%);
+}
+
+@media only screen and (max-width: 1000px) {
+  .window {
+    grid-template:
+      "title title"
+      "header header"
+      "main main"
+      "aside aside"/ 4fr;
+  }
+
+  main section {
+    gap: 1.5vh 1.5vw;
+    grid-template: none;
+  }
+
+  aside {
+    grid-template: 3vh auto / repeat(3, 1fr);
+  }
+
+  aside h4 {
+    grid-area: 1 / span 3;
+  }
+
+  aside .add-ad h5 {
+    margin: 5vh 2vw;
+  }
+
+  aside .knife-ad p {
+    width: 20vw;
+  }
 }
